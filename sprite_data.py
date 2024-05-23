@@ -1,0 +1,47 @@
+from settings import *
+
+simon_sprites = {
+    0   :   pygame.image.load("Sprites/Simon/Simon1.png"),
+    1   :   pygame.image.load("Sprites/Simon/Simon2.png"),
+    2   :   pygame.image.load("Sprites/Simon/Simon3.png"),
+    3   :   pygame.image.load("Sprites/Simon/Simon4.png"),
+    4   :   pygame.image.load("Sprites/Simon/Simon5.png"),
+    5   :   pygame.image.load("Sprites/Simon/Simon6.png"),
+    6   :   pygame.image.load("Sprites/Simon/Simon7.png"),
+    7   :   pygame.image.load("Sprites/Simon/Simon8.png"),
+    8   :   pygame.image.load("Sprites/Simon/Simon9.png"),
+    9   :   pygame.image.load("Sprites/Simon/Simon10.png"),
+    10  :   pygame.image.load("Sprites/Simon/Simon11.png"),
+    11  :   pygame.image.load("Sprites/Simon/Simon12.png"),
+    12  :   pygame.image.load("Sprites/Simon/Simon13.png"),
+    13  :   pygame.image.load("Sprites/Simon/Simon14.png"),
+    14  :   pygame.image.load("Sprites/Simon/Simon15.png"),
+    15  :   pygame.image.load("Sprites/Simon/Simon16.png"),
+    16  :   pygame.image.load("Sprites/Simon/Simon17.png"),
+    17  :   pygame.image.load("Sprites/Simon/Simon18.png"),
+    18  :   pygame.image.load("Sprites/Simon/Simon19.png"),
+    19  :   pygame.image.load("Sprites/Simon/Simon20.png"),
+    20  :   pygame.image.load("Sprites/Simon/Simon21.png"),
+    21  :   pygame.image.load("Sprites/Simon/Simon22.png"),
+    22  :   pygame.image.load("Sprites/Simon/Simon23.png"),
+    23  :   pygame.image.load("Sprites/Simon/Simon24.png"),
+    24  :   pygame.image.load("Sprites/Simon/Simon25.png"),
+    25  :   pygame.image.load("Sprites/Simon/Simon26.png"),
+    26  :   pygame.image.load("Sprites/Simon/Simon27.png"),
+    27  :   pygame.image.load("Sprites/Simon/Simon28.png"),
+    28  :   pygame.image.load("Sprites/Simon/Simon29.png"),
+    29  :   pygame.image.load("Sprites/Simon/Simon30.png"),
+}
+
+simon_anim = {
+    "IDLERIGHT"         :   [0],
+    "IDLELEFT"          :   [1],
+    "WALKINGRIGHT"      :   [2, 3, 4, 5, 6, 7],
+    "WALKINGLEFT"       :   [8, 9, 10, 11, 12, 13],
+    "JUMPINGRIGHT"      :   [14],
+    "JUMPINGLEFT"       :   [15],
+    "CROUCHINGRIGHT"    :   [16],
+    "CROUCHINGLEFT"     :   [17],
+    "CROUCHWALKINGRIGHT":   [18, 19, 20, 21, 22, 23],
+    "CROUCHWALKINGLEFT" :   [24, 25, 26, 27, 28, 29] 
+}
