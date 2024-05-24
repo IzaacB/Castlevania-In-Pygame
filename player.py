@@ -90,7 +90,6 @@ class Player():
 
             if abs(self.hit_t - self.col_t) <= abs(self.hit_l - self.col_l):
                 if self.hit_l <= self.col_r and self.hit_r >= self.col_l:
-                    print("HIT")
                     if self.hit_l - self.col_l <= 0:
                         self.x = self.col_l - 16 - (self.hit_l - self.x)
                     else:
