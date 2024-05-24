@@ -10,9 +10,10 @@ class Player():
         self.accel_y = 0
 
         self.idle_speed = 60
+        self.jump_speed = 30
         self.crouch_speed = 30
 
-        self.jump_force = 250
+        self.jump_force = 200
         self.gravity = 10
 
         #Define hitboxes:
@@ -104,6 +105,7 @@ class Player():
                     if self.hit_t <= self.col_b and self.hit_b >= self.col_t:
                         if self.hit_t - self.col_t >= 0:
                             self.y = self.col_b - (self.hit_t - self.y)
+                            self.accel_y = 0
                     self.update_collision()
                 else:
                     if self.hit_l <= self.col_r and self.hit_r >= self.col_l:
@@ -147,9 +149,17 @@ class Player():
             self.state = "CROUCHING"
 
     def handle_jumping_state(self, keys):
+        self.accel_x = 0
         self.anim_speed = 8
         self.anim_state = self.state
         self.accel_y -= self.gravity
+
+        if keys[pygame.K_d]:
+            self.accel_x = self.idle_speed
+            self.dir = "RIGHT"
+        elif keys[pygame.K_a]:
+            self.accel_x = -self.idle_speed
+            self.dir = "LEFT"
         
         if self.grounded:
             self.state = "IDLE"
