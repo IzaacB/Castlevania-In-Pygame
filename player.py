@@ -9,11 +9,17 @@ class Player():
         self.accel_x = 0
         self.accel_y = 0
 
-        self.idle_speed = 60
-        self.jump_speed = 30
+        self.idle_accel = 30
+        self.idle_deaccel = 15
+        self.idle_speed_max = 60
+
+        self.jump_accel = 15
+        self.jump_deaccel = 1
+        self.jump_speed_max = 60
+
         self.crouch_speed = 30
 
-        self.jump_force = 200
+        self.jump_force = 225
         self.gravity = 10
 
         #Define hitboxes:
@@ -61,7 +67,7 @@ class Player():
 
             if abs(self.hit_t - self.col_t) > abs(self.hit_l - self.col_l):
                 if self.hit_t <= self.col_b and self.hit_b >= self.col_t:
-                    if self.hit_t - self.col_t <= 0:
+                    if self.hit_t - self.col_t <= 0 and self.accel_y <= 0:
                         self.y = self.col_t - 16 - (self.hit_t - self.y)
                         self.grounded = True
                 self.update_collision()
@@ -126,16 +132,29 @@ class Player():
         self.accel_y = 0
         self.anim_speed = 8
 
-        if keys[pygame.K_d]:
-            self.accel_x = self.idle_speed
+        if keys[pygame.K_d] and self.accel_x <= self.idle_speed_max:
+            self.accel_x += self.idle_accel
             self.anim_state = "WALKING"
             self.dir = "RIGHT"
-        elif keys[pygame.K_a]:
-            self.accel_x = - self.idle_speed
+
+        if keys[pygame.K_a] and self.accel_x >= -self.idle_speed_max:
+            self.accel_x -= self.idle_accel
             self.anim_state = "WALKING"
             self.dir = "LEFT"
+
+        if self.accel_x > 0:
+            if self.accel_x <= self.idle_deaccel:
+                self.accel_x = 0
+            else:
+                self.accel_x -= self.idle_deaccel
+
+        elif self.accel_x < 0:
+            if self.accel_x >= -self.idle_deaccel:
+                self.accel_x = 0
+            else:
+                self.accel_x += self.idle_deaccel
+
         else:
-            self.accel_x = 0
             self.anim_state = self.state
 
         if keys[pygame.K_DOWN]:
@@ -148,17 +167,29 @@ class Player():
             self.state = "CROUCHING"
 
     def handle_jumping_state(self, keys):
-        self.accel_x = 0
         self.anim_speed = 8
         self.anim_state = self.state
         self.accel_y -= self.gravity
 
-        if keys[pygame.K_d]:
-            self.accel_x = self.idle_speed
+        if keys[pygame.K_d] and self.accel_x <= self.jump_speed_max:
+            self.accel_x += self.jump_accel
             self.dir = "RIGHT"
-        elif keys[pygame.K_a]:
-            self.accel_x = -self.idle_speed
+
+        if keys[pygame.K_a] and self.accel_x >= -self.jump_speed_max:
+            self.accel_x -= self.jump_accel
             self.dir = "LEFT"
+
+        if self.accel_x > 0:
+            if self.accel_x <= self.jump_deaccel:
+                self.accel_x = 0
+            else:
+                self.accel_x -= self.jump_deaccel
+
+        elif self.accel_x < 0:
+            if self.accel_x >= -self.jump_deaccel:
+                self.accel_x = 0
+            else:
+                self.accel_x += self.jump_deaccel
         
         if self.grounded:
             self.state = "IDLE"
